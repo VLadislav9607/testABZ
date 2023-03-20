@@ -1,0 +1,48 @@
+.users {
+  margin-bottom: 140px;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 29px;
+    margin: 50px auto;
+  }
+
+  &__inner>span {
+    align-self: center;
+    justify-self: center;
+  }
+
+  &__button {
+    width: 120px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .users {
+    margin: 70px 60px;
+  }
+}
+
+@media (max-width: 890px) {
+  .users {
+    margin: 70px 32px;
+
+    &__inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+}
+
+@media (max-width: 607px) {
+  .users {
+    margin: 70px 0px;
+
+    &__inner {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
+  }
+}

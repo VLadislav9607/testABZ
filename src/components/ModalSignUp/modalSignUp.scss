@@ -1,0 +1,41 @@
+.success__modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in;
+
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__wrapper {
+    width: 80vw;
+    position: absolute;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: white;
+    transform: scale(0.5);
+    transition: all 0.3s ease-in;
+
+    & img {
+      margin: 0 auto;
+    }
+  }
+}
+
+.active__modal {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.active {
+  transform: scale(1);
+}
