@@ -10,7 +10,7 @@ const SignUp = ({ setOpenModal, setMessage, getUsers }) => {
   const [sizePhoto, setSizePhoto] = React.useState(0)
   const [token, setToken] = React.useState('');
   const { register, formState: { errors, isValid }, handleSubmit } = useForm({
-    mode: 'all',
+    mode: 'onBlur',
     defaultValues: {
       phone: '+380',
     }
@@ -19,14 +19,11 @@ const SignUp = ({ setOpenModal, setMessage, getUsers }) => {
   React.useEffect(() => {
     (async () => {
       try {
-        await axios.get(`https://frontend-test-assignment-api.abz.agency/api/v1/positions`)
-          .then(res => {
-            setRadioButtons(res.data.positions);
-          });
-        await axios.get('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-          .then(res => {
-            setToken(res.data.token);
-          });
+        const { data } = await axios.get(`https://frontend-test-assignment-api.abz.agency/api/v1/positions`)
+        setRadioButtons(data.positions);
+
+        const token = await axios.get('https://frontend-test-assignment-api.abz.agency/api/v1/token')
+        setToken(token.data.token);
 
       } catch (error) {
         alert('Помилка сервера');
@@ -51,10 +48,9 @@ const SignUp = ({ setOpenModal, setMessage, getUsers }) => {
     }
     setSelectFile(e.target.files[0]);
     setSizePhoto(0)
-
   }
 
-  const onSubmit = async (dataUser) => {
+  const onSubmit = (dataUser) => {
 
     const newUser = new FormData();
     newUser.append('position_id', 1);
@@ -63,7 +59,7 @@ const SignUp = ({ setOpenModal, setMessage, getUsers }) => {
     newUser.append('phone', dataUser.phone);
     newUser.append('photo', selectFile);
     try {
-      await fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
+      fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
         method: 'POST',
         body: newUser,
         headers: {
